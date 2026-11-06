@@ -1,0 +1,44 @@
+[
+  {
+    "id": "c1",
+    "nombre": "Ana",
+    "telefono": "555-0101",
+    "aceptaRecordatorios": true,
+    "ultimaOrden": "2026-10-01T12:00:00.000Z"
+  },
+  {
+    "id": "c2",
+    "nombre": "Luis",
+    "telefono": "555-0102",
+    "aceptaRecordatorios": true,
+    "ultimaOrden": "2026-10-02T12:00:00.000Z"
+  },
+  {
+    "id": "c3",
+    "nombre": "María",
+    "telefono": "555-0103",
+    "aceptaRecordatorios": false,
+    "ultimaOrden": "2026-09-20T12:00:00.000Z"
+  },
+  {
+    "id": "c4",
+    "nombre": "Carlos",
+    "telefono": "555-0104",
+    "aceptaRecordatorios": true,
+    "ultimaOrden": "2026-11-03T12:00:00.000Z"
+  },
+  {
+    "id": "c5",
+    "nombre": "Sofía",
+    "telefono": "555-0105",
+    "aceptaRecordatorios": false,
+    "ultimaOrden": null
+  },
+  {
+    "id": "c6",
+    "nombre": "Diego",
+    "telefono": "555-0106",
+    "aceptaRecordatorios": true,
+    "ultimaOrden": null
+  }
+]

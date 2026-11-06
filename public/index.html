@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lavandería Burbuja · Asistente IA</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Banner visible de IA Responsable -->
+  <aside class="notice-banner" aria-label="Aviso del proyecto">
+    <span>🛡️ Proyecto educativo · datos ficticios · soy una IA</span>
+  </aside>
+
+  <!-- Encabezado del sitio -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-icon" aria-hidden="true">🧺</div>
+        <div>
+          <h1 class="brand-title">Lavandería Burbuja</h1>
+          <span class="brand-subtitle">Atención inteligente al cliente</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span id="modeBadge" class="mode-badge" title="Modo del motor de IA">
+          <span class="mode-dot"></span>
+          <span id="modeText">Detectando modo...</span>
+        </span>
+        <a href="/operador.html" class="nav-link-btn" id="navOperador">
+          <span>⚙️ Panel del Operador</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenedor principal de Chat -->
+  <main class="main-content">
+    <!-- Alerta accesible para errores -->
+    <div id="chatAlert" class="alert-box alert-error hidden" role="alert">
+      <span id="chatAlertText"></span>
+      <button type="button" id="chatAlertDismiss" class="alert-dismiss" aria-label="Cerrar aviso">&times;</button>
+    </div>
+
+    <section class="chat-layout" aria-label="Ventana de conversación">
+      <!-- Barra superior de la conversación -->
+      <div class="chat-topbar">
+        <div class="chat-assistant-info">
+          <div class="assistant-avatar" aria-hidden="true">🤖</div>
+          <div>
+            <div class="assistant-name">Asistente Burbuja</div>
+            <div class="assistant-status">En línea para ayudarte</div>
+          </div>
+        </div>
+        <button type="button" id="btnNewChat" class="btn-secondary" title="Reiniciar conversación actual">
+          🔄 Nueva conversación
+        </button>
+      </div>
+
+      <!-- Área de mensajes scrolleable -->
+      <div id="chatMessages" class="chat-scroll-area" role="log" aria-live="polite" aria-atomic="false">
+        <!-- Indicador de escritura dinámico -->
+        <div id="typingIndicator" class="typing-row hidden" aria-hidden="true">
+          <div class="assistant-avatar" aria-hidden="true">🤖</div>
+          <div class="typing-bubble">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de sugerencias rápidas (chips) -->
+      <nav class="chips-bar" aria-label="Preguntas de ejemplo">
+        <span class="chips-label">Prueba con:</span>
+        <button type="button" class="chip-btn" data-prompt="¿Cuánto cuesta lavar 6 kg exprés?">¿Cuánto cuesta lavar 6 kg exprés?</button>
+        <button type="button" class="chip-btn" data-prompt="Estado de LAV-2026-0001">Estado de LAV-2026-0001</button>
+        <button type="button" class="chip-btn" data-prompt="Quiero registrar una queja">Quiero registrar una queja</button>
+        <button type="button" class="chip-btn" data-prompt="¿Cuáles son los horarios y sucursal?">¿Cuáles son los horarios y sucursal?</button>
+        <button type="button" class="chip-btn" data-prompt="¿Tienen servicio a domicilio?">¿Tienen servicio a domicilio?</button>
+      </nav>
+
+      <!-- Barra de entrada de texto -->
+      <div class="chat-input-bar">
+        <form id="chatForm" class="chat-form" autocomplete="off">
+          <label for="chatInput" class="visually-hidden">Mensaje para el asistente</label>
+          <textarea
+            id="chatInput"
+            class="chat-input"
+            rows="1"
+            maxlength="2000"
+            placeholder="Pregunta por tarifas, consulta tu orden o solicita cotización..."
+            required
+          ></textarea>
+          <button type="submit" id="btnSend" class="btn-primary" aria-label="Enviar mensaje">
+            <span>Enviar</span>
+            <span aria-hidden="true">➤</span>
+          </button>
+        </form>
+        <div class="input-footer">
+          <span>Presiona Enter para enviar · Shift+Enter para nueva línea</span>
+          <span id="charCounter" aria-live="polite">0 / 2000</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

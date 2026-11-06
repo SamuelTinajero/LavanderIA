@@ -1,0 +1,15 @@
+[
+  {"id":"lavado","nombre":"Lavado","unidad":"kg","precio":30,"minimo":4,"esInventado":false},
+  {"id":"planchado","nombre":"Planchado","unidad":"docena","precio":110,"esInventado":false},
+  {"id":"tintoreria","nombre":"Tintorería","unidad":"pieza","precio":65,"esInventado":false},
+  {"id":"colchonetas","nombre":"Colchonetas","unidad":"cotizar","precio":120,"cotizacion":true,"esInventado":false},
+  {"id":"desmanchado","nombre":"Desmanchado","unidad":"pieza","precio":40,"esInventado":true},
+  {"id":"tenis","nombre":"Limpieza de tenis","unidad":"par","precio":120,"esInventado":true},
+  {"id":"cobijas","nombre":"Cobijas, colchas y cobertores","unidad":"pieza","precio":150,"esInventado":true},
+  {"id":"edredon","nombre":"Edredón king size","unidad":"pieza","precio":220,"esInventado":true},
+  {"id":"peluches","nombre":"Peluches","unidad":"pieza","precio":80,"esInventado":true},
+  {"id":"uniformes","nombre":"Uniformes","unidad":"kg","precio":32,"esInventado":true},
+  {"id":"manteleria","nombre":"Mantelería","unidad":"kg","precio":35,"esInventado":true},
+  {"id":"toallas_spa","nombre":"Toallas para spa","unidad":"kg","precio":28,"cotizacion":true,"esInventado":true},
+  {"id":"blancos_hotel","nombre":"Blancos para hoteles","unidad":"cotizar","precio":null,"cotizacion":true,"esInventado":true}
+]

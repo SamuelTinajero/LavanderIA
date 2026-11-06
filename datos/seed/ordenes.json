@@ -1,0 +1,53 @@
+[
+  {
+    "folio": "LAV-2026-0003",
+    "clienteId": "c4",
+    "clienteNombre": "Carlos",
+    "items": [
+      {
+        "servicio": "tenis",
+        "cantidad": 1
+      }
+    ],
+    "expres": false,
+    "domicilio": false,
+    "total": 120,
+    "estado": "lista",
+    "creada": "2026-11-03T12:00:00.000Z",
+    "actualizada": "2026-11-04T12:00:00.000Z"
+  },
+  {
+    "folio": "LAV-2026-0002",
+    "clienteId": "c2",
+    "clienteNombre": "Luis",
+    "items": [
+      {
+        "servicio": "planchado",
+        "cantidad": 13
+      }
+    ],
+    "expres": false,
+    "domicilio": false,
+    "total": 220,
+    "estado": "en_proceso",
+    "creada": "2026-10-02T12:00:00.000Z",
+    "actualizada": "2026-10-02T12:00:00.000Z"
+  },
+  {
+    "folio": "LAV-2026-0001",
+    "clienteId": "c1",
+    "clienteNombre": "Ana",
+    "items": [
+      {
+        "servicio": "lavado",
+        "cantidad": 6
+      }
+    ],
+    "expres": true,
+    "domicilio": false,
+    "total": 270,
+    "estado": "recibida",
+    "creada": "2026-10-01T12:00:00.000Z",
+    "actualizada": "2026-10-01T12:00:00.000Z"
+  }
+]

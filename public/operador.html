@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lavandería Burbuja · Panel del Operador</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Banner visible de IA Responsable -->
+  <aside class="notice-banner" aria-label="Aviso del proyecto">
+    <span>🛡️ Proyecto educativo · datos ficticios · soy una IA</span>
+  </aside>
+
+  <!-- Encabezado del panel -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="brand-group">
+        <div class="brand-icon" aria-hidden="true">⚙️</div>
+        <div>
+          <h1 class="brand-title">Panel del Operador</h1>
+          <span class="brand-subtitle">Lavandería Burbuja · Control y Seguimiento</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span id="autoRefreshStatus" class="mode-badge" title="Frecuencia de actualización">
+          <span class="mode-dot"></span>
+          <span>Actualización auto (5s)</span>
+        </span>
+        <a href="/index.html" class="nav-link-btn" id="navChat">
+          <span>💬 Ir al Chat con la IA</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <!-- Alertas visibles -->
+    <div id="operatorAlert" class="alert-box alert-error hidden" role="alert">
+      <span id="operatorAlertText"></span>
+      <button type="button" id="operatorAlertDismiss" class="alert-dismiss" aria-label="Cerrar aviso">&times;</button>
+    </div>
+
+    <div id="operatorSuccess" class="alert-box alert-success hidden" role="status">
+      <span id="operatorSuccessText"></span>
+      <button type="button" id="operatorSuccessDismiss" class="alert-dismiss" aria-label="Cerrar aviso">&times;</button>
+    </div>
+
+    <!-- Rejilla de operación -->
+    <div class="operator-grid">
+      <!-- Columna Izquierda: Formulario para crear orden con cotización en vivo -->
+      <section class="panel-card" aria-labelledby="formOrderTitle">
+        <div class="panel-header">
+          <h2 id="formOrderTitle" class="panel-title">
+            <span>➕</span>
+            <span>Nueva Orden</span>
+          </h2>
+        </div>
+
+        <form id="createOrderForm" autocomplete="off">
+          <div class="form-group">
+            <label for="inputCliente" class="form-label">Cliente (Nombre o ID):</label>
+            <input
+              type="text"
+              id="inputCliente"
+              class="form-input"
+              placeholder="Ej. Ana, Carlos o ID de cliente"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="selectServicio" class="form-label">Servicio Principal:</label>
+            <select id="selectServicio" class="form-select">
+              <option value="lavado">Lavado por encargo (kg, mín. 4 kg - $30/kg)</option>
+              <option value="planchado">Planchado (docena - $110)</option>
+              <option value="tintoreria">Tintorería (por prenda - desde $65)</option>
+              <option value="desmanchado">Desmanchado profundo (pieza - $40)</option>
+              <option value="tenis">Limpieza de tenis (par - $120)</option>
+              <option value="cobijas">Cobijas / colchas (pieza - $150)</option>
+              <option value="edredon">Edredón king size (pieza - $220)</option>
+              <option value="peluches">Lavado de peluches (pieza - $80)</option>
+              <option value="uniformes">Lavado de uniformes (kg - $32)</option>
+              <option value="manteleria">Mantelería (kg - $35)</option>
+              <option value="colchonetas">Colchonetas (desde $120 - cotización)</option>
+              <option value="toallas_spa">Toallas a spa (kg - $28, cotización)</option>
+              <option value="blancos_hotel">Blancos hotel (kg - cotización)</option>
+            </select>
+          </div>
+
+          <div id="prendaContainer" class="form-group hidden">
+            <label for="selectPrenda" class="form-label">Tipo de prenda para tintorería:</label>
+            <select id="selectPrenda" class="form-select">
+              <option value="camisa">Camisa / blusa ($65)</option>
+              <option value="pantalon">Pantalón / falda ($75)</option>
+              <option value="saco">Saco ($120)</option>
+              <option value="vestido">Vestido ($140)</option>
+              <option value="abrigo">Abrigo ($180)</option>
+              <option value="traje">Traje 2 piezas ($190)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="inputCantidad" class="form-label">Cantidad (kg, docenas, piezas o pares):</label>
+            <input
+              type="number"
+              id="inputCantidad"
+              class="form-input"
+              min="1"
+              max="200"
+              value="4"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox-label" for="checkExpres">
+              <input type="checkbox" id="checkExpres">
+              <span>⚡ Servicio exprés 24 h (+50 % sobre lavado)</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="form-checkbox-label" for="checkDomicilio">
+              <input type="checkbox" id="checkDomicilio">
+              <span>🚚 Entrega a domicilio ($40 / Gratis ≥ $300)</span>
+            </label>
+          </div>
+
+          <!-- Widget de cotización en vivo -->
+          <div class="form-group">
+            <span class="form-label">Cotización en vivo (POST /api/cotizar):</span>
+            <div id="liveQuoteContainer" class="live-quote-box" aria-live="polite">
+              <div id="liveQuoteLines"></div>
+              <div id="liveQuoteDescuento" class="quote-line hidden"></div>
+              <div id="liveQuoteDomicilio" class="quote-line hidden"></div>
+              <div id="liveQuoteTotal" class="quote-total">
+                <span>Total Estimado:</span>
+                <span id="liveQuoteTotalVal">$0.00 MXN</span>
+              </div>
+              <div id="liveQuoteWarning" class="quote-warning hidden">
+                ⚠️ Este servicio requiere confirmación y cotización con personal humano.
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="btnCrearOrden" class="btn-primary btn-block">
+            <span>Registrar Orden</span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Columna Derecha: Tabla de Órdenes del Sistema -->
+      <section class="panel-card" aria-labelledby="tableOrdersTitle">
+        <div class="panel-header">
+          <h2 id="tableOrdersTitle" class="panel-title">
+            <span>📋</span>
+            <span>Órdenes en Sistema</span>
+          </h2>
+          <button type="button" id="btnRecargarOrdenes" class="btn-secondary" title="Recargar órdenes ahora">
+            🔄 Actualizar
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Folio</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Prendas / Items</th>
+                <th scope="col">Total</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <tr>
+                <td colspan="6" class="empty-state">Cargando órdenes...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- Segunda sección: Bandeja de Avisos WhatsApp y Quejas -->
+    <div class="operator-grid grid-mt">
+      <!-- Bandeja de Avisos WhatsApp -->
+      <section class="panel-card" aria-labelledby="avisosTitle">
+        <div class="panel-header">
+          <h2 id="avisosTitle" class="panel-title">
+            <span>💬</span>
+            <span>Avisos al Cliente (Simulador WhatsApp)</span>
+          </h2>
+          <button type="button" id="btnSimularLunes" class="btn-secondary" title="Dispara recordatorios semanales a clientes elegibles">
+            🗓️ Simular lunes
+          </button>
+        </div>
+
+        <div id="avisosFeed" class="whatsapp-feed" role="feed" aria-label="Historial de mensajes enviados a clientes">
+          <div class="empty-state">No hay avisos registrados todavía.</div>
+        </div>
+      </section>
+
+      <!-- Lista de Quejas Registradas -->
+      <section class="panel-card" aria-labelledby="quejasTitle">
+        <div class="panel-header">
+          <h2 id="quejasTitle" class="panel-title">
+            <span>🚨</span>
+            <span>Quejas y Reportes de Clientes</span>
+          </h2>
+          <button type="button" id="btnRecargarQuejas" class="btn-secondary" title="Recargar lista de quejas">
+            🔄 Actualizar
+          </button>
+        </div>
+
+        <div id="quejasContainer" class="quejas-list" role="region" aria-label="Reportes levantados por clientes">
+          <div class="empty-state">No hay quejas abiertas registradas.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal Accesible para Confirmar Entrega de Órdenes -->
+  <div id="deliverModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <h3 id="modalTitle" class="modal-title">Confirmar Entrega de Prendas</h3>
+      <p class="modal-desc">
+        Folio: <strong id="modalFolioText">LAV-2026-0000</strong>
+      </p>
+      <p class="modal-desc">
+        Conforme a la política de seguridad, ingresa el <strong>nombre exacto del cliente</strong> registrado para autorizar la liberación de las prendas:
+      </p>
+      <form id="deliverForm" autocomplete="off">
+        <div class="form-group">
+          <label for="modalInputNombre" class="form-label">Nombre del Cliente:</label>
+          <input
+            type="text"
+            id="modalInputNombre"
+            class="form-input"
+            placeholder="Ej. Ana"
+            required
+          >
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="modalBtnCancel" class="btn-secondary">Cancelar</button>
+          <button type="submit" id="modalBtnConfirm" class="btn-primary">Validar y Entregar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="/operador.js"></script>
+</body>
+</html>

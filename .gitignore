@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+*.log
+.tmpdata/
+.smoke-data/
+.DS_Store
+Thumbs.db
+cerebro/
