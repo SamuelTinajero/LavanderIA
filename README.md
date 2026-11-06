@@ -210,7 +210,6 @@ docs/                  Entrega y capturas de pantalla
 
 La descripción para publicar el proyecto está en [docs/ENTREGA.md](docs/ENTREGA.md).
 
-## Integrantes
+## Integrante
 
-- _Nombre del integrante 1_
-- _Nombre del integrante 2_
+Samuel Anibal Tinajero Armendariz
